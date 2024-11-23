@@ -37,4 +37,13 @@ song's code, and name, as well as the name of the user who uploaded it.
 I think my stretch goals would include creating a visaulizer that lets the user visualize the sound,
 giving them the ability to speed up playback, and maybe play sound in reverse.
 
-wireframe sketch: https://app.moqups.com/jXuSQ4Aw0EZAXuJIgvZYbhWCDXrniOB3/view/page/ad64222d5
+wireframe sketch:
+
+Main page:
+![Main page]("../wireframes/bytebeat sharing - Main.png")
+
+Browsing page:
+![Browsing page]("../wireframes/bytebeat sharing - browsing.png")
+
+About/tutorial page:
+![About/tutorial page]("../wireframes/bytebeat sharing - About_tutorial.png")
