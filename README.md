@@ -40,10 +40,10 @@ giving them the ability to speed up playback, and maybe play sound in reverse.
 wireframe sketch:
 
 Main page:
-![Main page](../wireframes/bytebeat_sharing_main.png)
+![Main page](./wireframes/bytebeat_sharing_main.png)
 
 Browsing page:
-![Browsing page](../wireframes/bytebeat_sharing_browsing.png)
+![Browsing page](./wireframes/bytebeat_sharing_browsing.png)
 
 About/tutorial page:
-![About/tutorial page](../wireframes/bytebeat_sharing_about_tutorial.png)
+![About/tutorial page](./wireframes/bytebeat_sharing_about_tutorial.png)
