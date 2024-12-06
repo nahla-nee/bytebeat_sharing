@@ -1,4 +1,4 @@
-#player_controls button, #player_controls label {
+#player-controls button, #player-controls label {
   font-size: 28px;
 }
 
@@ -14,14 +14,14 @@ body {
   flex-wrap: nowrap;
 }
 
-#editor_and_player {
+#editor-and-player {
   flex-basis: 65%;
   flex-grow: 1;
   flex-shrink: 0;
   margin: 25px;
 }
 
-#info_and_settings {
+#info-and-settings {
   margin-right: 25px;
 }
 
