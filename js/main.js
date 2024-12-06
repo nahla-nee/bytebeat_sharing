@@ -28,6 +28,7 @@ function on_load() {
     document.getElementById("volume-slider").value = 0.5;
     document.getElementById("player-mode").value = "bytebeat";
     document.getElementById("player-sample-rate").value = 8000;
+    document.getElementById("theme").value = "dark";
 
     create_processor();
 
@@ -41,6 +42,7 @@ function on_load() {
     document.getElementById("player-mode").onchange = player_mode_change;
     document.getElementById("player-sample-rate").onchange = sample_rate_change;
     document.getElementById("volume-slider").onchange = volume_change;
+    document.getElementById("theme").onchange = theme_changed;
 }
 
 function playback_toggle() {
@@ -82,4 +84,19 @@ function sample_rate_change(new_rate) {
 function volume_change() {
     let audio_val = parseFloat(document.getElementById("volume-slider").value);
     player_state.gain_node.gain_value = audio_val;
+}
+
+function theme_changed() {
+    const root = document.querySelector(":root");
+
+    switch (document.getElementById("theme").value) {
+        case "dark":
+            root.style.setProperty("--bg-color", "black");
+            root.style.setProperty("--text-color", "white");
+            break;
+        case "light":
+            root.style.setProperty("--bg-color", "white");
+            root.style.setProperty("--text-color", "black");
+            break;
+    }
 }
