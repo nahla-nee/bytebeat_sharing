@@ -3,22 +3,22 @@ window.onload = on_load;
 let player_state = null;
 let aws_lambda_url = "https://wywmo7jm2f.execute-api.us-east-2.amazonaws.com/beat";
 
+const create_processor = async () => {
+    let gain_node = player_state.audio_ctx.createGain();
+    gain_node.connect(player_state.audio_ctx.destination);
+
+    await player_state.audio_ctx.audioWorklet.addModule("js/audio_processor.js");
+    let audio_worklet_node = new AudioWorkletNode(player_state.audio_ctx, 'audio-processor');
+    audio_worklet_node.connect(player_state.audio_ctx.destination);
+
+    player_state.gain_node = {};
+    player_state.audio_processor_node = audio_worklet_node;
+
+    player_mode_change();
+    volume_change();
+};
+
 function on_load() {
-    const create_processor = async () => {
-        let gain_node = player_state.audio_ctx.createGain();
-        gain_node.connect(player_state.audio_ctx.destination);
-
-        await player_state.audio_ctx.audioWorklet.addModule("js/audio_processor.js");
-        let audio_worklet_node = new AudioWorkletNode(player_state.audio_ctx, 'audio-processor');
-        audio_worklet_node.connect(player_state.audio_ctx.destination);
-
-        player_state.gain_node = {};
-        player_state.audio_processor_node = audio_worklet_node;
-
-        player_mode_change();
-        volume_change();
-    };
-
     player_state = {
         audio_ctx: new AudioContext({ latencyHint: "balanced", sampleRate: 8000 }),
         needs_processor_update: true
@@ -79,8 +79,19 @@ function player_mode_change() {
     });
 }
 
-function sample_rate_change(new_rate) {
-    player_state.sample_rate = Number(document.getElementById("player-sample-rate").value);
+sample_rate_change = async () => {
+    let sample_rate = Number(document.getElementById("player-sample-rate").value);
+    
+    player_state.audio_processor_node = null;
+    player_state.gain_node = null;
+    player_state.audio_ctx = new AudioContext({ latencyHint: "balanced", sampleRate: sample_rate });
+    player_state.audio_ctx.suspend();
+    await create_processor();
+
+    player_state.audio_processor_node.port.postMessage({
+        command: "set_function",
+        data: document.getElementById("editor").value
+    });
 }
 
 function volume_change() {
