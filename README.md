@@ -1,6 +1,14 @@
 # bytebeat_sharing
 a website to share cool bytebeats c:
 
+## To run
+
+1. Download project via download button or git clone
+2. Open project folder in visual studio code
+3. Make sure to have Microsoft's Live Preview extension installed
+4. Using the visual studio code command palette, start the live preview server
+5. Head to a browser and open localhost:3000/index.html, or use the window opened in vs code
+
 ## Project specification
 
 My idea for this project is to make a website for the purpose of sharing bytebeat music. As a brief
