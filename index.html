@@ -31,6 +31,7 @@
       </p>
     </div>
     <div id="settings">
+      <h2>Settings</h2>
       <table>
         <tr>
           <td>
@@ -62,6 +63,46 @@
           <td>
             <input type="number" id="player-sample-rate" name="player-sample-rate" onchange="sample_rate_change(this.value)" value="8000">
           </td>
+        </tr>
+      </table>
+    </div>
+    <div id="share_section">
+      <h2>Share</h2>
+      <p>
+        To allow you control over your shared music without making an account, we allow you to simply
+        set a password per beat. If you want to update your beat simply insert the beat's name and password
+        and hit share. If it already exists, and your password is correct, you'll update it. If it
+        doesn't exist, you'll create it! Think of this as your username and password in a way. But
+        not really. Don't use an important password to you here, this stuff isn't hashed, it's just
+        straight clear text.
+      </p>
+      <table>
+        <tr>
+          <td>
+            <label for="id">Beat name:</label>
+          </td>
+          <td>
+            <input type="text" id="id" name="id">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Password</label>
+          </td>
+          <td>
+            <input type="password" id="password" name="password">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Repeat password</label>
+          </td>
+          <td>
+            <input type="password" id="repeat-password" name="repeat-password">
+          </td>
+        </tr>
+        <tr>
+          <td><input type="button" value="Share" id="share" name="share"></td>
         </tr>
       </table>
     </div>

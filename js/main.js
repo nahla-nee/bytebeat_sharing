@@ -1,6 +1,7 @@
 window.onload = on_load;
 
 let player_state = null;
+let aws_lambda_url = "https://wywmo7jm2f.execute-api.us-east-2.amazonaws.com/beat";
 
 function on_load() {
     const create_processor = async () => {
@@ -23,8 +24,17 @@ function on_load() {
         needs_processor_update: true
     };
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    // load default beat if no id to load is defined
+    if (urlParams.get("id") == null) {
+        document.getElementById("editor").value = "((t>>4)+(t>>5|t>>8|t&120))";
+    }
+    else {
+        get_beat(urlParams.get("id"));
+    }
+
     // default settings and beat
-    document.getElementById("editor").value = "((t>>4)+(t>>5|t>>8|t&120))";
     document.getElementById("volume-slider").value = 0.5;
     document.getElementById("player-mode").value = "bytebeat";
     document.getElementById("player-sample-rate").value = 8000;
@@ -41,6 +51,7 @@ function on_load() {
     document.getElementById("player-sample-rate").onchange = sample_rate_change;
     document.getElementById("volume-slider").onchange = volume_change;
     document.getElementById("theme").onchange = theme_changed;
+    document.getElementById("share").onclick = share_beat;
 }
 
 function playback_toggle() {
@@ -93,4 +104,50 @@ function theme_changed() {
             root.style.setProperty("--link-hover-color", "navy");
             break;
     }
+}
+
+share_beat = async () => {
+    let id = document.getElementById("id").value;
+    let pass = document.getElementById("password").value;
+    let repeat_pass = document.getElementById("repeat-password").value;
+
+    if (pass !== repeat_pass) {
+        window.alert("Passwords don't match");
+        return;
+    }
+
+    let code = document.getElementById("editor").value;
+    let request_data = {
+        "id": id,
+        "code": code,
+        "password": pass
+    };
+
+    await fetch(aws_lambda_url, {
+        method: "PUT",
+        body: JSON.stringify(request_data)
+    }).then(function(data) {
+        console.log(data);
+    })
+    .catch(function() {
+        window.alert("Failed to share bytebeat");
+    });
+}
+
+get_beat = async (id) => {
+    let editor = document.getElementById("editor");
+    let id_field = document.getElementById("id");
+
+    await fetch(aws_lambda_url + `/${id}`, {
+        method: "GET"
+    }).then(async (data) => {
+        console.log(data);
+        let body = await data.json();
+        console.log(body);
+        editor.value = body.code;
+        id_field.value = body.id;
+    })
+    .catch(function() {
+        window.alert(`Failed to load bytebeat named ${id}`)
+    });
 }
