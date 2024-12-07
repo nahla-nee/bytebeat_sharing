@@ -1,4 +1,6 @@
 :root {
     --bg-color: black;
     --text-color: white;
+    --link-color: aquamarine;
+    --link-hover-color: pink;
 }
