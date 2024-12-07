@@ -107,10 +107,14 @@ function theme_changed() {
 }
 
 share_beat = async () => {
-    let id = document.getElementById("id").value;
+    let id = document.getElementById("id").value.trim();
     let pass = document.getElementById("password").value;
     let repeat_pass = document.getElementById("repeat-password").value;
 
+    if (id === null || id.length === 0) {
+        window.alert("Can't have an empty beat name");
+        return;
+    }
     if (pass !== repeat_pass) {
         window.alert("Passwords don't match");
         return;
