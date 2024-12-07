@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Bytebeat sharing</title>
+    <link rel="stylesheet" href="css/root_colors.css">
+    <link rel="stylesheet" href="css/info.css">
+  </head>
+  <div id="info">
+    <h1>Info</h1>
+    <p>
+      Bytebeats and floatbeats are a form of low-complexity art where in music is generated through
+      algorithmic manipulation of a continously incrementing variable, though there are many
+      definitions and restrictions that vary from person to person. This type of art draws inspiration
+      from the demoscene and is focused on making art out of very minimal resources.
+    </p>
+    <p>
+      Though traditionally made via C programs, bytebeat music has can be replicated anywhere, and a
+      popular way of creating it as of late has been via Javascript. The basic concepts remain between
+      language to language, and are easiest to demonstrate through  this simple bytebeat:
+    </p>
+    <pre>
+#include &lt;stdio.h&gt;
+int main() {
+    int t = 0;
+    for(;;t++) {
+        putchar(t)
+    }
+}
+    </pre>
+    <p>
+      In the above C program the variable, t, is continously incremented, and then, via the putchar
+      function is "printed" to the screen. This doesn't print the textual representation of the
+      numerical value that t holds, but rather prints the actual numerical value as if it was a
+      a character. The traditional way to play bytebeats is to then run this program, and pipe its
+      output into a sound device, via ALSA usually, if on Linux. The sound device can be configured
+      in many different ways, but the "standard" way is to play 8 bit audio at 8kHz. In the example
+      above, only the lowest byte is played, the fact that its an integer with 4 bytes doesn't do
+      much in this context, but it allows right shifting the bits to create more interesting patterns
+      later on.
+    </p>
+    <p>
+      If you are not familiar with digital audio and aren't sure what this means, essentially we are
+      creating a sound wave. The sample rate here means how many times the player is "polling" our
+      program for a value per second to play.
+    </p>
+  </div>
+  <div id="tutorial">
+    <h1>Tutorial</h1>
+    <p>
+      Now that we have a base understanding of how bytebeats are made, let's delve into the different
+      types of bytebeats that there are. This website only supports 3 types: unsigned bytebeats (or 
+      just "bytebeats"), signed bytebeats, and floatbeats. They all function the same essentially,
+      what differs is the data type that is expected in the output, and its range. They are all
+      used for various reasons and at varying configurations, but the ideas from the Info section above
+      hold true for all three.
+    </p>
+    <p>
+      When you are working with the editor in the main section of the website, you can simply imagine
+      that your code is being magically inserted where that t variable is in the example above.
+    </p>
+    <h2>Signed and Unsigned Bytebeats</h2>
+    <p>
+      As the name would suggest, these types of bytebeats work by outputting a single byte, this byte's
+      value maybe interpreted as either a signed byte (whose values range from -128 to 127), or an
+      unsigned byte (whose values range from 0 to 255). This has no bearing on your code per se, but
+      it changes how the player interprets the results that you give it. The general way of creating
+      bytebeats is through bitwise and arithmetic operations. Explaining the patterns that each
+      operator produces and how to combine them is a bit out of the scope of this brief explanation,
+      but searching for a "bytebeat tutorial" should yield helpful results.
+    </p>
+    <h2>Floatbeats</h2>
+    <p>
+      Floatbeats operate similarly to bytebeats, you have an integer variable t that is constantly
+      incrementing and a player reading your output at some fixed sample rate to play audio. The
+      key difference here is that the player expects the data type to be a 32-bit floating point
+      number, and it expects its range to be from -1 to 1. The main method of creating floatbeats is
+      through arithemtic operatios, and trig functions. Floatbeats can be easier for some to reason
+      about due to this. Floatbeats can also be "less" lo-fi compared to bytebeats as the actual value
+      range is much greater than 255 values, giving you much finer control over the audio produced at
+      the expense of more resources consumption.
+    </p>
+  </div>
+</html>

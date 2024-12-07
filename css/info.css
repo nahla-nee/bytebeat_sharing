@@ -1,0 +1,17 @@
+html {
+  height: 100%;
+}
+
+body {
+  max-width: 60%;
+  margin: auto;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+pre {
+  font-size: 14px;
+  background-color: dimgray;
+  padding-left: 10px;
+  padding-top: 15px;
+}
