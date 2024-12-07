@@ -83,10 +83,14 @@ function theme_changed() {
         case "dark":
             root.style.setProperty("--bg-color", "black");
             root.style.setProperty("--text-color", "white");
+            root.style.setProperty("--link-color", "aquamarine");
+            root.style.setProperty("--link-hover-color", "pink");
             break;
         case "light":
             root.style.setProperty("--bg-color", "white");
             root.style.setProperty("--text-color", "black");
+            root.style.setProperty("--link-color", "olive");
+            root.style.setProperty("--link-hover-color", "navy");
             break;
     }
 }
