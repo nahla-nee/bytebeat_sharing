@@ -36,9 +36,7 @@ function on_load() {
         player_state.needs_processor_update = true;
     };
     document.getElementById("stop-audio").onclick = () => { player_state.audio_ctx.suspend() };
-    document.getElementById("decrease-speed").onclick = decrease_speed;
     document.getElementById("playback-toggle").onclick = playback_toggle;
-    document.getElementById("increase-speed").onclick = increase_speed;
     document.getElementById("player-mode").onchange = player_mode_change;
     document.getElementById("player-sample-rate").onchange = sample_rate_change;
     document.getElementById("volume-slider").onchange = volume_change;
@@ -60,14 +58,6 @@ function playback_toggle() {
     else {
         player_state.audio_ctx.resume();
     }
-}
-
-function increase_speed() {
-    console.log("increase_speed() called");
-}
-
-function decrease_speed() {
-    console.log("decrease_speed() called");
 }
 
 function player_mode_change() {
