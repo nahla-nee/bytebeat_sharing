@@ -1,0 +1,29 @@
+html {
+  height: 100%;
+}
+
+body {
+  max-width: 60%;
+  padding-top: 20px;
+  margin: auto;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+pre {
+  font-size: 14px;
+  background-color: dimgray;
+  padding-left: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+a {
+  transition-duration: 0.35s;
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
