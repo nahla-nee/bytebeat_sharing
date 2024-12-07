@@ -52,6 +52,7 @@ function on_load() {
     document.getElementById("volume-slider").onchange = volume_change;
     document.getElementById("theme").onchange = theme_changed;
     document.getElementById("share").onclick = share_beat;
+    document.getElementById("delete").onclick = delete_beat;
 }
 
 function playback_toggle() {
@@ -106,7 +107,7 @@ function theme_changed() {
     }
 }
 
-share_beat = async () => {
+function share_beat() {
     let id = document.getElementById("id").value.trim();
     let pass = document.getElementById("password").value;
     let repeat_pass = document.getElementById("repeat-password").value;
@@ -127,7 +128,7 @@ share_beat = async () => {
         "password": pass
     };
 
-    await fetch(aws_lambda_url, {
+    fetch(aws_lambda_url, {
         method: "PUT",
         body: JSON.stringify(request_data)
     }).then(function(data) {
@@ -138,20 +139,35 @@ share_beat = async () => {
     });
 }
 
-get_beat = async (id) => {
+function delete_beat() {
+    let id = document.getElementById("id").value.trim();
+    let pass = document.getElementById("password").value;
+
+    fetch(aws_lambda_url + `/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify({
+            "password": pass
+        })
+    }).then(async (data) => {
+        window.alert("Deleted beat");
+    })
+    .catch(function() {
+        window.alert("Failed to delete beat");
+    })
+}
+
+function get_beat(id) {
     let editor = document.getElementById("editor");
     let id_field = document.getElementById("id");
 
-    await fetch(aws_lambda_url + `/${id}`, {
+    fetch(aws_lambda_url + `/${id}`, {
         method: "GET"
     }).then(async (data) => {
-        console.log(data);
         let body = await data.json();
-        console.log(body);
         editor.value = body.code;
         id_field.value = body.id;
     })
     .catch(function() {
-        window.alert(`Failed to load bytebeat named ${id}`)
+        window.alert(`Failed to load bytebeat named ${id}`);
     });
 }
